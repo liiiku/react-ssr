@@ -40,7 +40,7 @@
 
 *package.json中写的运行的命令*
 
-rimraf 清楚每次dist目录下生成的文件
+rimraf 清除每次dist目录下生成的文件
 
 
 ```
