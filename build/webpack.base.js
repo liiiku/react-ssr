@@ -1,14 +1,9 @@
 const path = require('path')
-const HTMLPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: {
-    app: path.join(__dirname, '../client/app.js')
-  },
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: '[name].[hash].js',
-    publicPath: ''
+    publicPath: '/public/'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -27,10 +22,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    new HTMLPlugin({
-      template: path.join(__dirname, '../client/tpl.html')
-    })
-  ]
+  }
 }
