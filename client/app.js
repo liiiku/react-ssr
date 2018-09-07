@@ -15,9 +15,9 @@ const render = (component) => {
 
 render(App)
 
-// if (module.hot) {
-//   module.hot.accept('./views/App', () => {
-//     const nextApp = require('./views/App').default
-//     render(nextApp)
-//   })
-// }
+if (module.hot) {
+  module.hot.accept('./views/App', () => {
+    const nextApp = require('./views/App').default
+    render(nextApp)
+  })
+}

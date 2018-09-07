@@ -16,7 +16,15 @@
     app.js
     tpl.html
 ```
-`.babelrc`
+- .babelrc中
+```
+{
+  "presets": [
+    ["es2015", {"loose": true}],
+    "react"
+  ]
+}
+```
 
 *需要安装的包*
 
@@ -75,3 +83,40 @@
 ![websocket](./doc-pic/websocket.jpg "webpack-dev-server 相关websocket截图")
 
 `webpack-dev-server: ^2.9.7` 不要高于这个版本，否则会报错
+
+## 第三次提交
+
+模块热更新和webpack-dev-server自动刷新的区别
+
+*react hot loader官方解释*
+
+>React Hot Loader is a plugin that allows React components to be live reloaded without the loss of state. It works with Webpack and other bundlers that support both Hot Module Replacement (HMR) and Babel plugins.
+
+模块热更新后state不会丢失，但是不同的webpack-dev-server相当于浏览器清除缓存的的刷新，state是不会保存的
+
+*模块热更新新增的重要代码*
+
+- webpack.config.client.js中
+```
+config.plugins.push(new webpack.HotModuleReplacementPlugin())
+
+devServer中增加配置项
+hot: true
+```
+- .babelrc中
+```
+"plugins": [
+  "react-hot-loader/babel"
+]
+```
+- app.js中
+```
+import { AppContainer } from 'react-hot-loader'
+
+if (module.hot) {
+  module.hot.accept('./views/App', () => {
+    const nextApp = require('./views/App').default
+    render(nextApp)
+  })
+}
+```
