@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "build:client": "webpack --config build/webpack.base.js",
+    "build:test": "webpack -w --inline --config build/webpack.config.client.js",
     "build": "npm run clean && npm run build:client"
   },
   "repository": {
@@ -31,7 +33,12 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "rimraf": "^2.6.2"
+    "react-hot-loader": "^4.3.6",
+    "rimraf": "^2.6.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.4"
   }
 }
