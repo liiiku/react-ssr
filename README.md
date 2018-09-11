@@ -1,5 +1,9 @@
 # react-ssr
-简单的react开发环境搭建 服务端渲染 开发环境的服务端渲染
+简单的react开发环境搭建
+
+服务端渲染
+
+开发环境的服务端渲染
 
 ---
 ## 第一次提交
@@ -154,3 +158,24 @@ app.get('*', function (req, res) {
   res.send(template.replace('<!--app-->', appString))
 })
 ```
+
+## 第五次提交
+
+*开发环境下查看服务端渲染的效果*
+
+第四次提交的时候，因为需要拿到生成的`html`返回，所以需要`build`编译之后才能看到相关的服务端渲染，现在我想在开发过程中，在用`webpack-dev-server`启动的时候也能实时的看到服务端渲染的效果，怎么做呢？
+
+在`server`目录下添加了`dev-static.js`文件，其中是拿到`webpack-dev-server`生成的资源文件的相关代码，因为我们知道`webpack-dev-server`生成的代码是不存到硬盘上的，也就是不会像我们`build`的时候生成一个`dist`目录，这样之后，在`package.json`中，添加命令：
+
+```
+"dev:server": "cross-env NODE_ENV=development node server/server.js",
+```
+
+这样也就一次执行，以下两个命令就可以看到相关`webpack-dev-server`时候的服务端渲染效果了：
+
+```
+"dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+"dev:server": "cross-env NODE_ENV=development node server/server.js",
+```
+
+就需用想第四次提交的时候写的那样，先`build`，在`npm run dev:server`了
