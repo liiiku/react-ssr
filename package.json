@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
-    "build:client": "webpack --config build/webpack.base.js",
+    "dev:server": "node server/server.js",
+    "build:client": "webpack --config build/webpack.config.client.js",
+    "build:server": "webpack --config build/webpack.config.server.js",
     "build:test": "webpack -w --inline --config build/webpack.config.client.js",
     "build": "npm run clean && npm run build:client"
   },
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/liiiku/react-ssr#readme",
   "dependencies": {
+    "express": "^4.16.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "webpack": "^3.10.0"

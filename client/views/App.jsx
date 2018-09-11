@@ -16,7 +16,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div>This a  is {this.state.a} <button onClick={this.add}>加一</button></div>
+      <div>This ab  is {this.state.a} <button onClick={this.add}>加一</button></div>
     )
   }
 }

@@ -120,3 +120,37 @@ if (module.hot) {
   })
 }
 ```
+
+用`webpack-dev-server`启动的时候，一定要将根目录下的`dist`目录删除，否则，`webpack`就会直接去找到这个文件
+
+## 第四次提交
+
+*基本服务端渲染*
+
+思路就是，node拿到html内容直接返回给前端，注意：服务端渲染的时候，`dist`文件中的内容都要提前生成好，也就是说要执行以下命令：
+
+```
+"build:client": "webpack --config build/webpack.config.client.js",
+"build:server": "webpack --config build/webpack.config.server.js",
+```
+这样之后会生成`dist`目录已经相关的内容，然后
+
+```
+"dev:server": "node server/server.js",
+```
+
+localhost:8888启动，可以看到效果
+
+```
+const app = express()
+
+const serverEntry = require('../dist/server-entry').default
+const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
+console.log(12, template)
+app.use('/public', express.static(path.join(__dirname, '../dist')))
+app.get('*', function (req, res) {
+  const appString = ReactSSR.renderToString(serverEntry)
+  console.log(16, appString)
+  res.send(template.replace('<!--app-->', appString))
+})
+```
