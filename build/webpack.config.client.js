@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
-const HTMLPlugin = require('html-webpack-plugin')
+const HTMLPlugin = require('html-webpack-plugin') // 能够生成一个html页面，并且把所有entery的js都注入到html中，路径就是output配置的
 const baseConfig = require('./webpack.base')
 
 const isDev = process.env.NODE_ENV = 'development'

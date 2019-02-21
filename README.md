@@ -179,3 +179,25 @@ app.get('*', function (req, res) {
 ```
 
 就需用想第四次提交的时候写的那样，先`build`，在`npm run dev:server`了
+
+## 小记
+
+webpack打包的机制是loader的机制，webpack通过loader处理某一种资源
+`npm init`的时候，keywords 是如果发npm包的时候，别人会根据keywords来进行搜索
+从入口文件开始，会根据入口文件的依赖关系，一层一层的迭代下去之后，把整个js形成的依赖树，整体打包成一个js文件
+
+用babel-loader 前也要装 babel-core 因为loader只是一个插件，并不包含`babel`的核心代码
+babel默认是编译es6的代码，而不能支持jsx，怎么让他支持呢？这里根目录新建`.babelrc`
+因为现在js的版本特别多，`babel-core`中是没有包含这么多版本的，所以要自己指定版本，这里就是在`.babelrc`中指定`presets`的配置了
+```
+  "presets": [
+    ["es2015", {"loose": true}],
+    "react"
+  ]
+```
+做服务端渲染使用的是react-dom/server提供的奖react组件渲染成HTML的方法
+
+因为服务度的node环境中是没有document的，所以不能直接用app.js 所以要新建一个server.entry.js，这里面只需要把服务端需要渲染的东西export出去就可以了，但是这是jsx代码，node环境还是没法执行的
+所以还是要打包一下webpack.config.server.js
+
+路径不写全，或者不写相对路径，会默认去node_modules下面去找
