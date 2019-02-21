@@ -201,3 +201,18 @@ babel默认是编译es6的代码，而不能支持jsx，怎么让他支持呢？
 所以还是要打包一下webpack.config.server.js
 
 路径不写全，或者不写相对路径，会默认去node_modules下面去找
+
+`require('../dist/server-entry')` 打印的效果如下：
+
+![server-entry](./doc-pic/serverSSR.jpg "服务端渲染入口文件打包后的文件")
+
+因为`server.entry.js`中是`export default <App />`, 如果：
+
+```
+export const app = App
+import { app } from 'app'
+
+所以，如果是 export default app，所以在node中，require的是export出来的东西，也就是default包裹的
+```
+
+服务端渲染的时候，服务端读取的html文件是dist文件中的html，也就是服务端打包生成的html

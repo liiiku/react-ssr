@@ -8,6 +8,7 @@ const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 
 if (!isDev) {
+  // require('../dist/server-entry') 打印的效果见Reacme.md
   const serverEntry = require('../dist/server-entry').default
   const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
   console.log(12, template)
